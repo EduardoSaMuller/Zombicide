@@ -1,0 +1,22 @@
+body{
+  background-color: #dfe6e9;
+  -webkit-transform: perspective(900px);
+  -webkit-transform-style: preserve-3d;
+}
+
+ul{
+  text-decoration: none;
+  list-style-type: none;
+  display: block;
+}
+ul li {
+  text-decoration: none;
+  margin: 10px;
+  display: inline-flex;
+}
+
+img{
+  width:240px;
+  height: 300px;
+  border-radius: 10px;
+}
