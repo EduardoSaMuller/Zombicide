@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css'
 import Ann from "./imagens/BP_Ann_ID.jpg"
 import Baldric from "./imagens/BP_Baldric_ID.jpg"
@@ -374,7 +374,8 @@ function App() {
         pickedPeople.push(pickedPerson);
       }
     }
-
+    console.log(setPeople)
+    console.log(result)
     setResult(pickedPeople);
     setPickedPeople((prevPickedPeople) => [...prevPickedPeople, ...pickedPeople]);
   };
@@ -384,7 +385,7 @@ function App() {
   return (
     <div>
       <label>
-        Quantidade de pessoas:
+        Quantidade de personagens:
         <input
           type="number"
           min="1"
