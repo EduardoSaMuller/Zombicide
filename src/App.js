@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './App.css'
 import Ann from "./imagens/BP_Ann_ID.jpg"
 import Baldric from "./imagens/BP_Baldric_ID.jpg"
@@ -150,11 +150,22 @@ import Lion from './imagens/Lion-O.jpeg'
 import Chetara from './imagens/Chetara.jpeg' 
 import Escamoso from './imagens/Escamoso.jpeg' 
 import Snarf from './imagens/Snarf.jpeg' 
-import Chacal from './imagens/Chacal.jpeg' 
+import Chacal from './imagens/Chacal.jpeg'
+import Ysabel from './imagens/SGSK_Ysabel_ID.jpg'
+import Gaak from './imagens/SGSK_Gaak_ID.jpg'
+import Blackheart from './imagens/SGSK_Blackheart_ID.jpg'
+import Milo from './imagens/SGNA_Milo_ID.jpg' 
+import Sicarius from './imagens/MD_Sicarius.jpg' 
+import Myriam from './imagens/MD_Myriam.jpg' 
+import Azure from './imagens/SGSK_Azure_ID.jpg' 
+import LilNed from './imagens/MD_LilNed.jpg' 
+import Zee from './imagens/HB_Zee_ID.jpg' 
+import Liam from './imagens/HB_Liam_ID.jpg' 
+import North from './imagens/HB_Liam_ID.jpg' 
 
 
 function App() {
-  const [items, setItems] = useState([
+  const [people, setPeople] = useState([
     { id: 1, name: 'Ann' , img:Ann},
     { id: 2, name: 'Baldric' , img:Baldric},
     { id: 3, name: 'Clovis' , img:Clovis},
@@ -306,51 +317,94 @@ function App() {
     { id: 147, name: 'Escamoso' , img:Escamoso},
     { id: 148, name: 'Snarf' , img:Snarf},
     { id: 149, name: 'Chacal' , img:Chacal},
+    { id: 150, name: 'Ysabel' , img:Ysabel},
+    { id: 151, name: 'Gaak' , img:Gaak},
+    { id: 152, name: 'The Blackheart' , img:Blackheart},
+    { id: 153, name: 'Milo' , img:Milo},
+    { id: 154, name: 'Azure' , img:Azure},
+    { id: 155, name: 'Myriam' , img:Myriam},
+    { id: 154, name: 'Sicarius' , img:Sicarius},
+    { id: 155, name: 'LilNed' , img:LilNed},
+    { id: 156, name: 'Zee' , img:Zee},
+    { id: 157, name: 'NorthTheHalfling' , img:North},
+    {id: 158, name: 'Liam' , img:Liam}
+
   ]);
-  const [numItems, setNumItems] = useState(0);
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [quantity, setQuantity] = useState(1);
+  const [result, setResult] = useState([]);
+  const [pickedPeople, setPickedPeople] = useState([]);
 
-  function handleChange(event) {
-    setNumItems(event.target.value);
-  }
-  function handleSubmit(event) {
-    event.preventDefault();
+  const handleQuantityChange = (event) => {
+    setQuantity(event.target.value);
+  };
 
-    // Sorteia os itens de forma aleatória
-    for (let i = 0; i < numItems; i++) {
-      const randomIndex = Math.floor(Math.random() * items.length);
-      const randomItem = items[randomIndex];
-      setSelectedItems(prevSelectedItems => [...prevSelectedItems, randomItem]);
-      setItems(prevItems => prevItems.filter(item => item.id !== randomItem.id));
+  const handleRandomPick = () => {
+    const availablePeople = [...people];
+    const pickedPeople = [];
 
-     
+    for (let i = 0; i < quantity; i++) {
+      let randomIndex = Math.floor(Math.random() * availablePeople.length);
+      let pickedPerson = availablePeople[randomIndex];
 
+      // Remove the picked person from the availablePeople array
+      availablePeople.splice(randomIndex, 1);
+
+      // Check if the picked person is ID 4 or ID 5
+      if (pickedPerson.id === 121) {
+        pickedPeople.push(pickedPerson);
+        const person5 = availablePeople.find((person) => person.id === 122);
+        if (person5) {
+          pickedPeople.push(person5);
+          availablePeople.splice(
+            availablePeople.findIndex((person) => person.id === 122),
+            1
+          );
+        }
+      } else if (pickedPerson.id === 122) {
+        pickedPeople.push(pickedPerson);
+        const person4 = availablePeople.find((person) => person.id === 121);
+        if (person4) {
+          pickedPeople.push(person4);
+          availablePeople.splice(
+            availablePeople.findIndex((person) => person.id === 121),
+            1
+          );
+        }
+      } else {
+        pickedPeople.push(pickedPerson);
+      }
     }
 
-    
-  }
+    setResult(pickedPeople);
+    setPickedPeople((prevPickedPeople) => [...prevPickedPeople, ...pickedPeople]);
+  };
+
+  
 
   return (
     <div>
-    <form onSubmit={handleSubmit}>
       <label>
-        Quantidade de personagens a serem sorteados:
-        <input type="number" value={numItems} onChange={handleChange} />
+        Quantidade de pessoas:
+        <input
+          type="number"
+          min="1"
+          value={quantity}
+          onChange={handleQuantityChange}
+        />
       </label>
-      <button type="submit">Sortear</button>
-    </form>
-    <div>
-      Personagens sorteados:
-      <ul>
-        {selectedItems.map(item => (
-          <li key={item.id}>
-            <img src={item.img} alt={item.src} />
-          </li>
-        ))}
-      </ul>
+      <button onClick={handleRandomPick}>Sortear</button>
+      
+      <div>
+        Sorteados:
+        <ul>
+          {pickedPeople.map((person) => (
+            <li key={person.id}>
+              <img src={person.img} alt={person.name} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
-    
-  </div>
   );
 }
 
