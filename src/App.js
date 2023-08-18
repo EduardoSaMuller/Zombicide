@@ -145,7 +145,7 @@ import Theo from "./imagens/WB_Theo_ID.jpg"
 import Panthro from './imagens/Panthro.jpeg'
 import Tygra from './imagens/Tygra.jpeg'
 import Willikit from './imagens/WilyKit.jpeg'
-import Willicat from './imagens/WilyKit.jpeg'
+import Willicat from './imagens/WilyKat.jpeg'
 import Lion from './imagens/Lion-O.jpeg' 
 import Chetara from './imagens/Chetara.jpeg' 
 import Escamoso from './imagens/Escamoso.jpeg' 
@@ -162,6 +162,8 @@ import LilNed from './imagens/MD_LilNed.jpg'
 import Zee from './imagens/HB_Zee_ID.jpg' 
 import Liam from './imagens/HB_Liam_ID.jpg' 
 import North from './imagens/HB_Liam_ID.jpg' 
+import Homer from './imagens/PBP_Homer_ID.jpg'
+import Benson from './imagens/PBP_Benson_ID.jpg'
 
 
 function App() {
@@ -259,11 +261,9 @@ function App() {
     { id: 91, name: 'Sha"Keel' , img:ShaKeel},
     { id: 92, name: 'Black Currant' , img:BlackCurrant},
     { id: 93, name: 'Persephone' , img:Persephone},
-    { id: 142, name: "Thrud", img:Thrud},
     { id: 94, name: 'Celia La Santa' , img:CeliaLaSanta},
     { id: 95, name: 'Donna Carlotta' , img:DonnaCarlotta},
     { id: 96, name: 'Pipino' , img:Pipino},
-    { id: 141, name: "The Little Prince", img:TheLittlePrince},
     { id: 97, name: 'Johrgrund' , img:Johrgrund},
     { id: 98, name: 'Korin' , img:Korin},
     { id: 99, name: 'Ruff Ghanor' , img:RuffGhanor},
@@ -327,8 +327,11 @@ function App() {
     { id: 155, name: 'LilNed' , img:LilNed},
     { id: 156, name: 'Zee' , img:Zee},
     { id: 157, name: 'NorthTheHalfling' , img:North},
-    {id: 158, name: 'Liam' , img:Liam}
-
+    { id: 158, name: 'Liam' , img:Liam},
+    { id: 159, name: "Thrud", img:Thrud},
+    { id: 160, name: "The Little Prince", img:TheLittlePrince},
+    { id: 161, name: "Benson", img:Benson},
+    { id: 162, name: "Homer", img:Homer},
   ]);
   const [quantity, setQuantity] = useState(1);
   const [result, setResult] = useState([]);
@@ -349,7 +352,7 @@ function App() {
       // Remove the picked person from the availablePeople array
       availablePeople.splice(randomIndex, 1);
 
-      // Check if the picked person is ID 4 or ID 5
+      // Check if the picked person is ID 121 or ID 122
       if (pickedPerson.id === 121) {
         pickedPeople.push(pickedPerson);
         const person5 = availablePeople.find((person) => person.id === 122);
@@ -374,8 +377,6 @@ function App() {
         pickedPeople.push(pickedPerson);
       }
     }
-    console.log(setPeople)
-    console.log(result)
     setResult(pickedPeople);
     setPickedPeople((prevPickedPeople) => [...prevPickedPeople, ...pickedPeople]);
   };
