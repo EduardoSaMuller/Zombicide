@@ -384,7 +384,8 @@ function App() {
   
 
   return (
-    <div>
+    <div className='content'>
+     <div className='top-content'>
       <label>
         Quantidade de personagens:
         <input
@@ -395,8 +396,8 @@ function App() {
         />
       </label>
       <button onClick={handleRandomPick}>Sortear</button>
-      
-      <div>
+      </div>
+      <div className='bottom-content'>
         Sorteados:
         <ul>
           {pickedPeople.map((person) => (

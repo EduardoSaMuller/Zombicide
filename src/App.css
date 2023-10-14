@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
 body{
   background-color: #dfe6e9;
   -webkit-transform: perspective(900px);
@@ -20,3 +22,35 @@ img{
   height: 300px;
   border-radius: 10px;
 }
+label{
+  width: 300px;
+}
+label,div,input{
+  font-family: righteous,Helvetica,Arial,sans-serif ;
+}
+
+button{
+  font-family: righteous,Helvetica,Arial,sans-serif ;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ flex-direction: column;
+}
+.top-content{
+  margin: 30px 0;
+}
+.bottom-content{
+text-align: center;
+}
+input{
+  width: 50px;
+  padding: 5px;
+  border: 1px solid black;
+}
+
