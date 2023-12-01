@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
+
 import './App.css'
 import Ann from "./imagens/BP_Ann_ID.jpg"
 import Baldric from "./imagens/BP_Baldric_ID.jpg"
@@ -164,7 +165,14 @@ import Liam from './imagens/HB_Liam_ID.jpg'
 import North from './imagens/HB_Liam_ID.jpg' 
 import Homer from './imagens/PBP_Homer_ID.jpg'
 import Benson from './imagens/PBP_Benson_ID.jpg'
-
+import Brickborn from "./imagens/SGEG_Brickborn.jpg"
+import Kaila from "./imagens/SGEG_Kaila_ID.jpg"
+import Hewelin from "./imagens/SGEG_Hewelin_ID.jpg"
+import Shalheira from "./imagens/SGEG_Shalheira_ID.jpg"
+import Cyrine from "./imagens/SGJH_Cyrine_ID.jpg"
+import Dravog from "./imagens/SGJH_Dravog_ID.jpg"
+import Gorvin from "./imagens/SGJH_Gorvin_ID.jpg"
+import Hildir from "./imagens/SGJH_Hildir_ID.jpg"
 
 function App() {
   const [people, setPeople] = useState([
@@ -323,84 +331,105 @@ function App() {
     { id: 153, name: 'Milo' , img:Milo},
     { id: 154, name: 'Azure' , img:Azure},
     { id: 155, name: 'Myriam' , img:Myriam},
-    { id: 154, name: 'Sicarius' , img:Sicarius},
-    { id: 155, name: 'LilNed' , img:LilNed},
-    { id: 156, name: 'Zee' , img:Zee},
-    { id: 157, name: 'NorthTheHalfling' , img:North},
-    { id: 158, name: 'Liam' , img:Liam},
-    { id: 159, name: "Thrud", img:Thrud},
-    { id: 160, name: "The Little Prince", img:TheLittlePrince},
-    { id: 161, name: "Benson", img:Benson},
-    { id: 162, name: "Homer", img:Homer},
-  ]);
+    { id: 156, name: 'Sicarius' , img:Sicarius},
+    { id: 157, name: 'LilNed' , img:LilNed},
+    { id: 158, name: 'Zee' , img:Zee},
+    { id: 159, name: 'NorthTheHalfling' , img:North},
+    { id: 160, name: 'Liam' , img:Liam},
+    { id: 161, name: "Thrud", img:Thrud},
+    { id: 162, name: "The Little Prince", img:TheLittlePrince},
+    { id: 163, name: "Benson", img:Benson},
+    { id: 164, name: "Homer", img:Homer},
+    { id: 165, name: "Brickborn", img:Brickborn},
+    { id: 166, name: "Kaila", img:Kaila},
+    { id: 167, name: "Hewelin", img:Hewelin},
+    { id: 168, name: "Shalheira", img:Shalheira},
+    { id: 169, name: "Cyrine", img:Cyrine},
+    { id: 170, name: "Dravog", img:Dravog},
+    { id: 171, name: "Gorvin", img:Gorvin},
+    { id: 172, name: "Hildir", img:Hildir},
+  ]);;
   const [quantity, setQuantity] = useState(1);
   const [result, setResult] = useState([]);
   const [pickedPeople, setPickedPeople] = useState([]);
+  const [remainingPeople, setRemainingPeople] = useState(people);
+  const [quantityAvailable, setQuantityAvailable] = useState(people.length);
 
   const handleQuantityChange = (event) => {
     setQuantity(event.target.value);
   };
 
+  useEffect(() => {
+    const availableCount = people.filter(person => !pickedPeople.includes(person)).length;
+    setQuantityAvailable(availableCount);
+  }, [people, pickedPeople]);
+
   const handleRandomPick = () => {
-    const availablePeople = [...people];
+    const availablePeople = [...remainingPeople]; // Usar remainingPeople em vez de people
     const pickedPeople = [];
 
-    for (let i = 0; i < quantity; i++) {
-      let randomIndex = Math.floor(Math.random() * availablePeople.length);
-      let pickedPerson = availablePeople[randomIndex];
+    if (availablePeople.length < quantity) {
+      console.log('Não há personagens suficientes para sortear.');
+      return;
+    }
 
-      // Remove the picked person from the availablePeople array
+    for (let i = 0; i < quantity; i++) {
+      const randomIndex = Math.floor(Math.random() * availablePeople.length);
+      const pickedPerson = availablePeople[randomIndex];
+
       availablePeople.splice(randomIndex, 1);
 
-      // Check if the picked person is ID 121 or ID 122
+      pickedPeople.push(pickedPerson);
+
       if (pickedPerson.id === 121) {
         pickedPeople.push(pickedPerson);
         const person5 = availablePeople.find((person) => person.id === 122);
         if (person5) {
-          pickedPeople.push(person5);
-          availablePeople.splice(
-            availablePeople.findIndex((person) => person.id === 122),
-            1
-          );
+            pickedPeople.push(person5);
+            availablePeople.splice(
+                availablePeople.findIndex((person) => person.id === 122),
+                1
+            );
         }
-      } else if (pickedPerson.id === 122) {
+    } else if (pickedPerson.id === 122) {
         pickedPeople.push(pickedPerson);
         const person4 = availablePeople.find((person) => person.id === 121);
         if (person4) {
-          pickedPeople.push(person4);
-          availablePeople.splice(
-            availablePeople.findIndex((person) => person.id === 121),
-            1
-          );
+            pickedPeople.push(person4);
+            availablePeople.splice(
+                availablePeople.findIndex((person) => person.id === 121),
+                1
+            );
         }
-      } else {
-        pickedPeople.push(pickedPerson);
-      }
     }
-    setResult(pickedPeople);
-    setPickedPeople((prevPickedPeople) => [...prevPickedPeople, ...pickedPeople]);
-  };
+    }
 
-  
+    setResult(pickedPeople);
+    setPickedPeople(prevPickedPeople => [...prevPickedPeople, ...pickedPeople]);
+    setRemainingPeople(prevRemainingPeople => prevRemainingPeople.filter(person => !pickedPeople.includes(person)));
+  };
 
   return (
     <div className='content'>
-     <div className='top-content'>
-      <label>
-        Quantidade de personagens:
-        <input
-          type="number"
-          min="1"
-          value={quantity}
-          onChange={handleQuantityChange}
-        />
-      </label>
-      <button onClick={handleRandomPick}>Sortear</button>
+      <div className='top-content'>
+        <label>
+          Quantidade de personagens:
+          <input
+            type="number"
+            min="1"
+            id='sorteador'
+            max={quantityAvailable}
+            value={quantity}
+            onChange={handleQuantityChange}
+          />
+        </label>
+        <button onClick={handleRandomPick}>Sortear</button>
       </div>
       <div className='bottom-content'>
+        <span>Personagens disponíveis: {quantityAvailable}</span><br />
         Sorteados:
         <ul>
-          {pickedPeople.map((person) => (
+          {pickedPeople.map(person => (
             <li key={person.id}>
               <img src={person.img} alt={person.name} />
             </li>
