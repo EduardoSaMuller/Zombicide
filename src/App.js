@@ -173,6 +173,15 @@ import Cyrine from "./imagens/SGJH_Cyrine_ID.jpg"
 import Dravog from "./imagens/SGJH_Dravog_ID.jpg"
 import Gorvin from "./imagens/SGJH_Gorvin_ID.jpg"
 import Hildir from "./imagens/SGJH_Hildir_ID.jpg"
+import EddieCeifador from './imagens/IM_EddieCeifador_ID.jpg'
+import EddieFarao from './imagens/IM_EddieFaraó_ID.jpg'
+import EddieMumia from './imagens/IM_EddieMúmia_ID.jpg'
+import EddieSamurai from './imagens/IM_EddieSamurai_ID.jpg'
+import EddieXama from './imagens/IM_EddieXamã_ID.jpg'
+import Malleus from './imagens/MD_Malleus_ID.jpg'
+import Ostara from './imagens/MD_Ostara_ID.jpg'
+import Sylvan from './imagens/MD_Sylvan_ID.jpg'
+
 
 function App() {
   const [people, setPeople] = useState([
@@ -348,6 +357,14 @@ function App() {
     { id: 170, name: "Dravog", img:Dravog},
     { id: 171, name: "Gorvin", img:Gorvin},
     { id: 172, name: "Hildir", img:Hildir},
+    { id: 173, name: "EddieXama", img:EddieXama},
+    { id: 174, name: "EddieSamurai", img:EddieSamurai},
+    { id: 175, name: "EddieMumia", img:EddieMumia},
+    { id: 176, name: "EddieFarao", img:EddieFarao},
+    { id: 177, name: "EddieCeifador", img:EddieCeifador},
+    { id: 178, name: "Malleus", img:Malleus},
+    { id: 179, name: "Ostara", img:Ostara},
+    { id: 180, name: "Sylvan", img:Sylvan},
   ]);;
   const [quantity, setQuantity] = useState(1);
   const [result, setResult] = useState([]);
@@ -428,6 +445,7 @@ function App() {
       <div className='bottom-content'>
         <span>Personagens disponíveis: {quantityAvailable}</span><br />
         Sorteados:
+        <div className='card-list'>
         <ul>
           {pickedPeople.map(person => (
             <li key={person.id}>
@@ -435,6 +453,7 @@ function App() {
             </li>
           ))}
         </ul>
+        </div>
       </div>
     </div>
   );
